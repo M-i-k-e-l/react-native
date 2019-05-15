@@ -38,6 +38,8 @@ public abstract class BaseViewManager<T extends View, C extends LayoutShadowNode
   private static final String PROP_ACCESSIBILITY_ROLE = "accessibilityRole";
   private static final String PROP_ACCESSIBILITY_STATES = "accessibilityStates";
   private static final String PROP_IMPORTANT_FOR_ACCESSIBILITY = "importantForAccessibility";
+  private static final String PROP_MIN_WIDTH = ViewProps.MIN_WIDTH;
+  private static final String PROP_MIN_HEIGHT = ViewProps.MIN_HEIGHT;
 
   // DEPRECATED
   private static final String PROP_ROTATION = "rotation";
@@ -205,6 +207,16 @@ public abstract class BaseViewManager<T extends View, C extends LayoutShadowNode
       } else if (liveRegion.equals("assertive")) {
         ViewCompat.setAccessibilityLiveRegion(view, ViewCompat.ACCESSIBILITY_LIVE_REGION_ASSERTIVE);
       }
+  }
+
+  @ReactProp(name = PROP_MIN_WIDTH)
+  public void setMinWidth(@Nonnull T view, int minWidth) {
+    view.setMinimumWidth((int) PixelUtil.toPixelFromDIP(minWidth));
+  }
+
+  @ReactProp(name = PROP_MIN_HEIGHT)
+  public void setMinHeight(@Nonnull T view, int minHeight) {
+    view.setMinimumHeight((int) PixelUtil.toPixelFromDIP(minHeight));
   }
 
   private static void setTransformProperty(@Nonnull View view, ReadableArray transforms) {
